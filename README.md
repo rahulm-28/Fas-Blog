@@ -60,9 +60,7 @@
 
 **Deployment:**
 
-**[Instructions specific to your chosen deployment method will go here]**
-
-This section will need to be filled in based on your preferred hosting platform (e.g., Heroku, AWS) and specific deployment steps. 
+It will be deployed on AWS in short time.
 
 **Contributing:**
 
