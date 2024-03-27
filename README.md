@@ -64,7 +64,7 @@ It will be deployed on AWS in short time.
 
 **Contributing:**
 
-We welcome contributions to this project! Please see the `CONTRIBUTING.md` file for guidelines on how to submit pull requests.
+We welcome contributions to this project! Please email me on rahulmittaljuly2@gmail.com.
 
 ### License
 
