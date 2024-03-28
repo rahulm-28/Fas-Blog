@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AuthenHeader = ({ heading, subheading, linkName, linkUrl = "#" }) => {
   return (
-    <div className="mb-10">
+    <div className="mb-3">
       <div className="flex justify-center">
         <img
           alt=""

@@ -5,7 +5,7 @@ const Signup = () => {
   return (
     <div className="p-10">
       <AuthenHeader
-        heading="Signup to create an account"
+        heading="Register to create an account"
         subheading="Already have an account? "
         linkName="Login"
         linkUrl="/login"
