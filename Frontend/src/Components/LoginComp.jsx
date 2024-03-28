@@ -22,7 +22,7 @@ const LoginComp = () => {
   const authenticateUser = () => {};
 
   return (
-    <div>
+    <div className="flex justify-center">
       <form className="mt-8 space-y-6 w-3/4 flex flex-col justify-center">
         <div className="-space-y-px">
           {fields.map((field) => (
