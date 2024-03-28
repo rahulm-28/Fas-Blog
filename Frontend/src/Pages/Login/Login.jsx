@@ -1,6 +1,6 @@
 import "./Login.css";
 import AuthenHeader from "../../Components/AuthenHeader";
-import * as TemplateLogin from "../../Components/Login";
+import LoginComp from "../../Components/LoginComp";
 
 const Login = () => {
   return (
@@ -11,7 +11,7 @@ const Login = () => {
         linkName="Signup"
         linkUrl="/signup"
       />
-      <TemplateLogin />
+      <LoginComp />
     </>
   );
 };
