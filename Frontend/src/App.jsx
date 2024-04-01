@@ -14,10 +14,10 @@ function App() {
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Blogs" element={<BlogSection />} />
+          <Route path="/" element={<BlogSection />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
