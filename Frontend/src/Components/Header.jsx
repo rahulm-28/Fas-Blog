@@ -1,19 +1,14 @@
 import { useState } from "react";
 import AddBlogDialog from "./AddBlogDialog";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isAddBlogModalOpen, setIsAddBlogModalOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <header className="flex fixed top-0 w-full z-10 items-center justify-between px-4 py-2 bg-white shadow-md">
-      {/* <nav className="hidden md:block">
-        <div className="flex items-center space-x-4">
-          <a href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Product</a>
-          <a href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
-          <a href="#" className="text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Company</a>
-        </div>
-      </nav> */}
       <a
-        href="#"
+        href="/"
         className="flex items-center flex-shrink-0 text-black mr-6 justify-center"
       >
         <span className="font-semibold text-xl tracking-tight">Fas-Blog</span>
@@ -23,14 +18,6 @@ const Header = () => {
           alt=""
         />
       </a>
-      {/* <div className='hidden md:block'>
-        <a
-          href='#'
-          className='text-black hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-        >
-          Log in
-        </a>
-      </div> */}
       <button
         type="button"
         className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
@@ -52,9 +39,6 @@ const Header = () => {
         <span className="sr-only">Open main menu</span>
       </button>
       <div className="flex overflow-hidden">
-        {/* <span className="inline-block h-6 w-6">
-      <span className="flex items-center justify-center bg-gray-600 rounded-full text-white text-xs font-bold">TW</span>
-    </span> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           style={{ cursor: "pointer" }}
@@ -63,8 +47,7 @@ const Header = () => {
           className="w-6 h-6"
           xlinkTitle="Add new blog"
           onClick={() => {
-            setIsAddBlogModalOpen(true);
-            console.log(isAddBlogModalOpen);
+            navigate("/createPost");
           }}
         >
           <path
@@ -73,8 +56,6 @@ const Header = () => {
             clipRule="evenodd"
           />
         </svg>
-
-        {isAddBlogModalOpen && <AddBlogDialog />}
 
         <img
           className="inline-block h-6 w-6 rounded-full ring-2 ring-white"
