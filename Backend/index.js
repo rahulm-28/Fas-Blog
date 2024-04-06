@@ -1,6 +1,16 @@
 const express = require("express");
-const PORT = 8000;
+const { connectToMongoDB } = require("./connect");
+const BLOG = require("./Models/Blog");
 
 const app = express();
+const PORT = 8000;
+
+connectToMongoDB("mongodb://localhost:27017/BlogDB")
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => console.error("Error  connecting to MongoDB", err));
+
+app.use(express.json());
 
 app.listen(PORT, () => console.log("Server started at port: " + PORT));
