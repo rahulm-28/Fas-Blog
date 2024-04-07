@@ -4,7 +4,7 @@ const Post = () => {
   return (
     <div>
       <Banner title="Post a new blog." />
-      <form className="p-5">
+      <form className="p-5" encType="multipart/form-data" method="POST">
         <div className="mb-4">
           <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
             Title
@@ -51,6 +51,27 @@ const Post = () => {
             name="description"
             className="border rounded w-full h-44 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Write your blog here!"
+          />
+        </div>
+
+        {/* <div className="flex flex-row justify-end mt-2">
+          <button
+            type="submit"
+            className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+          >
+            Submit Post
+          </button>
+        </div> */}
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-gray-700 font-bold mb-2">
+            Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
 
