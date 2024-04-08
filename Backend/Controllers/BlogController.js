@@ -1,4 +1,5 @@
 const uniqueId = require("uniqid");
+const path = require("path");
 const BLOG = require("../Models/Blog");
 const Author = require("../Models/Author");
 
@@ -10,13 +11,13 @@ async function handleGetAllBlogs(req, res) {
 async function handleCreateNewBlog(req, res) {
   const body = req.body;
   if (!req.body) return res.status(400).json({ error: "Missing blog data!" });
-  const { title, category, description } = req.body;
-  const userEmail = req.body.user;
+  const { title, category, content } = req.body;
+  const user = req.body.user;
   const image = req.file;
-  if (!title || !category || !description || !req.file) {
+  if (!title || !category || !content || !req.file) {
     console.log("Title:", title);
     console.log("Category:", category);
-    console.log("Description:", description);
+    console.log("Description:", content);
     if (image) {
       console.log("Image filename:", image.filename);
       console.log("Image path:", image.path);
@@ -27,19 +28,20 @@ async function handleCreateNewBlog(req, res) {
   }
 
   try {
-    // let author = await Author.findOne({ authorEmail: userEmail });
-    // if (!author) return res.status(400).json({ error: "User not found." });
+    let Foundauthor = await Author.findOne({ authorEmail: user });
+    if (!Foundauthor) return res.status(400).json({ error: "User not found." });
 
     //Create new blog post
     const newBlog = await BLOG.create({
       blogId: uniqueId(),
       title,
       category,
-      description: description,
-      author: userEmail,
+      content: content,
+      author: Foundauthor,
       image: {
-        data: req.file.buffer, // Assuming Multer adds buffer field to the file object
-        contentType: req.file.mimetype, // Assuming Multer adds mimetype field to the file object
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+        path: path.join("Assets", "Images", req.file.filename),
       },
     });
 
