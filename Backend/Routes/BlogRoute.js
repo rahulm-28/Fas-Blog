@@ -3,6 +3,7 @@ const multer = require("multer");
 const {
   handleCreateNewBlog,
   handleGetAllBlogs,
+  handleDeleteBlog,
 } = require("../Controllers/BlogController");
 
 const router = express.Router();
@@ -21,8 +22,10 @@ let upload = multer({
   storage: Storage,
 });
 
-router.get("/", handleGetAllBlogs);
+router.get("/getAll", handleGetAllBlogs);
 
 router.post("/createPost", upload.single("image"), handleCreateNewBlog);
+
+router.delete("/deletePost/:id", handleDeleteBlog);
 
 module.exports = router;

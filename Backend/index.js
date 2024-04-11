@@ -1,10 +1,13 @@
 const express = require("express");
 const { connectToMongoDB } = require("./connect");
 const blogRoute = require("./Routes/BlogRoute");
+const cors = require("cors");
 const BLOG = require("./Models/Blog");
 
 const app = express();
 const PORT = 8000;
+
+app.use(cors());
 
 connectToMongoDB("mongodb://localhost:27017/BlogDB")
   .then(() => {
@@ -14,6 +17,6 @@ connectToMongoDB("mongodb://localhost:27017/BlogDB")
 
 app.use(express.json());
 
-app.use("/", blogRoute);
+app.use("/api", blogRoute);
 
 app.listen(PORT, () => console.log("Server started at port: " + PORT));

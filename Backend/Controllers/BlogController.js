@@ -31,13 +31,15 @@ async function handleCreateNewBlog(req, res) {
     let Foundauthor = await Author.findOne({ authorEmail: user });
     if (!Foundauthor) return res.status(400).json({ error: "User not found." });
 
+    const { authorName, authorEmail } = Foundauthor;
+
     //Create new blog post
     const newBlog = await BLOG.create({
       blogId: uniqueId(),
       title,
       category,
       content: content,
-      author: Foundauthor,
+      author: { authorName, authorEmail },
       image: {
         data: req.file.buffer,
         contentType: req.file.mimetype,
@@ -53,7 +55,16 @@ async function handleCreateNewBlog(req, res) {
   }
 }
 
+async function handleDeleteBlog(req, res) {
+  const id = req.params.id;
+  await BLOG.findByIdAndDelete(id);
+  return res.json({
+    status: "Successfully deleted the blog.",
+  });
+}
+
 module.exports = {
   handleCreateNewBlog,
   handleGetAllBlogs,
+  handleDeleteBlog,
 };

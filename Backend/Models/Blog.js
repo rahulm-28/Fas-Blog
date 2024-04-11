@@ -11,6 +11,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -20,9 +24,15 @@ const blogSchema = new mongoose.Schema(
       contentType: String,
     },
     author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Author",
-      required: true,
+      authorName: {
+        type: String,
+        required: true,
+      },
+      authorEmail: {
+        type: String,
+        required: true,
+        unique: true,
+      },
     },
   },
   { timestamps: true }
