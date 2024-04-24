@@ -1,10 +1,73 @@
+import { useState } from "react";
 import Banner from "../../Components/Banner";
 
 const Post = () => {
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "",
+    content: "",
+    image: null,
+    user: "john@example.com",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    console.log(e.target.files);
+    setFormData({
+      ...formData,
+      image: {
+        data: { ...e.target.files[0] },
+        contentType: e.target.files[0].type,
+        path: `Assets/Images/${e.target.files[0].name}`,
+      },
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const requestBody = {
+      title: formData.title,
+      category: formData.category,
+      content: formData.content,
+      // image: formData.image,
+      user: formData.user,
+    };
+    console.log(requestBody);
+    try {
+      const response = await fetch("http://localhost:8000/api/createPost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        console.log("Blog post created successfully!");
+      } else {
+        console.error("Failed to create blog post.");
+      }
+    } catch (error) {
+      console.error("Error creating blog post:", error);
+    }
+  };
+
   return (
     <div>
       <Banner title="Post a new blog." />
-      <form className="p-5" encType="multipart/form-data" method="POST">
+      <form
+        className="p-5"
+        encType="multipart/form-data"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
         <div className="mb-4">
           <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
             Title
@@ -13,6 +76,7 @@ const Post = () => {
             type="text"
             id="title"
             name="title"
+            onChange={handleChange}
             placeholder="Blog Title"
             className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -28,6 +92,7 @@ const Post = () => {
           <select
             id="category"
             name="category"
+            onChange={handleChange}
             className="w-full border rounded py-2 px-3 text-gray-700"
           >
             <option value="" disabled selected hidden className="text-gray-100">
@@ -41,14 +106,15 @@ const Post = () => {
 
         <div className="mb-4">
           <label
-            htmlFor="description"
+            htmlFor="content"
             className="block text-gray-700 font-bold mb-2"
           >
             Description
           </label>
           <textarea
-            id="description"
-            name="description"
+            id="content"
+            name="content"
+            onChange={handleChange}
             className="border rounded w-full h-44 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Write your blog here!"
           />
@@ -69,6 +135,7 @@ const Post = () => {
           <input
             type="file"
             id="image"
+            onChange={handleFileChange}
             name="image"
             accept="image/*"
             className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

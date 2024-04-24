@@ -9,14 +9,16 @@ function BlogSection() {
         return res.json();
       })
       .then((data) => {
-        console.log(data[0].createdAt);
-        const dateString = data[0].createdAt;
-        const date = new Date(dateString).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-        setAllBlogs({ ...data, date });
+        console.log(data);
+        console.log(
+          new Date(data[0].createdAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        );
+
+        setAllBlogs(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -47,14 +49,17 @@ function BlogSection() {
                     className="mr-2 text-xs text-gray-500"
                     dateTime="2020-03-16"
                   >
-                    {/* Mar 16, 2020 */}
-                    {blog.date}
+                    {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </time>
                   <a
                     href="#"
                     className="px-2 py-1 text-xs font-semibold leading-none text-blue-500 bg-blue-100 rounded"
                   >
-                    Marketing
+                    {blog.category}
                   </a>
                 </div>
                 <div className="mt-2">

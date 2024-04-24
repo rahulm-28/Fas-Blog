@@ -19,10 +19,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      data: Buffer,
-      contentType: String,
-    },
+    // image: {
+    //   data: Buffer,
+    //   contentType: String,
+    // },
     author: {
       authorName: {
         type: String,
@@ -31,7 +31,6 @@ const blogSchema = new mongoose.Schema(
       authorEmail: {
         type: String,
         required: true,
-        unique: true,
       },
     },
   },

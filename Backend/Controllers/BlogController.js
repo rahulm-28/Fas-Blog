@@ -13,17 +13,17 @@ async function handleCreateNewBlog(req, res) {
   if (!req.body) return res.status(400).json({ error: "Missing blog data!" });
   const { title, category, content } = req.body;
   const user = req.body.user;
-  const image = req.file;
-  if (!title || !category || !content || !req.file) {
+  // const image = req.file;
+  if (!title || !category || !content) {
     console.log("Title:", title);
     console.log("Category:", category);
-    console.log("Description:", content);
-    if (image) {
-      console.log("Image filename:", image.filename);
-      console.log("Image path:", image.path);
-    } else {
-      console.log("No image uploaded");
-    }
+    console.log("content:", content);
+    // if (image) {
+    //   console.log("Image filename:", image.filename);
+    //   console.log("Image path:", image.path);
+    // } else {
+    //   console.log("No image uploaded");
+    // }
     return res.status(400).json({ error: "Missing required data!" });
   }
 
@@ -33,20 +33,20 @@ async function handleCreateNewBlog(req, res) {
 
     const { authorName, authorEmail } = Foundauthor;
 
-    //Create new blog post
+    // Create new blog post
     const newBlog = await BLOG.create({
       blogId: uniqueId(),
       title,
       category,
       content: content,
       author: { authorName, authorEmail },
-      image: {
-        data: req.file.buffer,
-        contentType: req.file.mimetype,
-        path: path.join("Assets", "Images", req.file.filename),
-      },
+      // image: {
+      //   data: req.file[0],
+      //   contentType: req.file.mimetype,
+      //   // path: path.join("Assets", "Images", req.file.filename),
+      //   path: "/C:/Users/rahul/OneDrive/Desktop/musicyy_UI.png",
+      // },
     });
-
     await newBlog.save();
     res.status(201).json({ message: "Blog post created successfully." });
   } catch (err) {
