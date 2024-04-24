@@ -47,13 +47,13 @@
 1. Start the backend server:
 
    ```bash
-   npm run server
+   npm start
    ```
 
 2. Start the frontend development server:
 
    ```bash
-   npm run start
+   npm run dev
    ```
 
    This will typically run the frontend application on `http://localhost:3000` by default.
